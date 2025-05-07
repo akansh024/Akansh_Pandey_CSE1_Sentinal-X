@@ -1,5 +1,10 @@
 # Akansh_Pandey_CSE1_Sentinal-X
 Sentinel-X - Cybersecurity Toolkit
+Team Members 
+Akansh Pandey
+Akshaya Tanwar
+Kartikey
+Palak Kashyap
 Sentinel-X is a comprehensive cybersecurity project that provides users with essential tools for securing their online presence. The project includes:
 
 Secure Chatting App (Currently under development)
