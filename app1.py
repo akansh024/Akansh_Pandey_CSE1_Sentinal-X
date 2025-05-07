@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import socket
-import threading
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -13,8 +12,8 @@ def scan_ports(target, start_port, end_port, timeout):
     for port in range(start_port, end_port + 1):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.settimeout(timeout / 1000.0)  # Convert timeout to seconds
-        result = sock.connect_ex((target, port))  # Try connecting to the port
-        if result == 0:  # If the connection was successful, the port is open
+        result = sock.connect_ex((target, port))
+        if result == 0:
             try:
                 service = socket.getservbyport(port)
             except:
@@ -28,15 +27,15 @@ def scan_ports(target, start_port, end_port, timeout):
         sock.close()
     return open_ports
 
-# API endpoint to trigger the port scan
+# API endpoint
 @app.route('/scan', methods=['POST'])
 def scan():
     data = request.json
     target = data.get('target')
     start_port = data.get('start_port')
     end_port = data.get('end_port')
-    timeout = data.get('timeout', 1000)  # Default timeout in milliseconds
-    
+    timeout = data.get('timeout', 1000)
+
     if not target:
         return jsonify({'error': 'Target is required'}), 400
 
