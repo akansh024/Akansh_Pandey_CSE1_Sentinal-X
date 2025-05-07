@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from Scanner import crawler, sql_scanner, xss_scanner, headers, admin_scanner
 
 app = Flask(__name__)
+CORS(app)  # <--- This enables cross-origin requests
 
 @app.route('/scan', methods=['POST'])
 def scan_site():
@@ -9,7 +11,6 @@ def scan_site():
     url = data.get('url')
 
     if not url or not url.startswith("http"):
-        
         return jsonify({"error": "Invalid or missing URL"}), 400
 
     links = crawler.crawl(url)
