@@ -188,18 +188,18 @@
       document.getElementById('btnSpinner').style.display = 'inline-block';
 
       try {
-        // Send request to the backend
-        const response = await fetch('https://akansh-pandey-cse1-sentinal-x-1.onrender.com', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            target: ip,
-            start_port: startPort,
-            end_port: endPort
-          })
-        });
+const response = await fetch('https://akansh-pandey-cse1-sentinal-x-1.onrender.com/scan', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    target: ip,
+    start_port: startPort,
+    end_port: endPort
+  })
+});
+
 
         const data = await response.json();
 
