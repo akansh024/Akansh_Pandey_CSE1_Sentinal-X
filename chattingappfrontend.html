@@ -496,7 +496,7 @@
         </div>
     </div>
     
-    
+    <!-- Security Verification Modal -->
     <div id="security-modal">
         <div class="security-modal-content">
             <h2><i class="fas fa-fingerprint"></i> Security Verification</h2>
@@ -658,8 +658,9 @@
             currentChat: null
         };
         
-        // Socket connection
-        const socket = io('https://sentinel-x-server.onrender.com', {
+        // Socket connection - Use a reliable server
+        const SOCKET_SERVER_URL = 'https://sentinel-x-server.onrender.com';
+        const socket = io(SOCKET_SERVER_URL, {
             autoConnect: false
         });
         
@@ -712,6 +713,10 @@
                 connected = true;
                 connectionStatus.textContent = 'Connected to secure network';
                 connectionStatus.className = 'connection-status connected';
+                connectionIndicator.style.backgroundColor = '#0f0';
+                connectionIndicator.style.boxShadow = '0 0 5px #0f0';
+                connectionText.textContent = 'Secured';
+                connectionText.style.color = '#0f0';
                 
                 // Register user with server
                 socket.emit('register', {
